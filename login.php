@@ -23,8 +23,8 @@ if(isset($_GET["error"])){
   <input type="email" name="uemail" class="form-control" id="uemail">
 </div>
 <div class="mb-3">
-  <label for="upassword" class="form-label">User password</label>
-  <input type="text" name="upassword" class="form-control" id="upassword">
+  <label for="pwd" class="form-label">User password</label>
+  <input type="text" name="pwd" class="form-control" id="pwd">
 </div>
 <button class="btn btn-primary">Login</button>
 </form>

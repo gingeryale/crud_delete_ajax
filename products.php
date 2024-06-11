@@ -17,9 +17,11 @@ require 'header.php';
                 <?= $row['p_name'];?>
             </a>
             <span>
+            <?php if(isset($_SESSION["userid"])){?>
             <button name="delete" class="btn btn-danger">Delete</button>
             <a name="edit" href="edit.php?id=<?= $row['p_id']; ?>" class="btn btn-info">Edit</a>
             </span>
+            <?php } ?>
         </li>
         <?php }
     }

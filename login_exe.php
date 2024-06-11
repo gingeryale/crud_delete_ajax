@@ -2,18 +2,18 @@
 
 if($_SERVER["REQUEST_METHOD"]=="POST"){
 
-    $username= $_POST['uemail'];
-    $password=$_POST['upassword'];
+    $email= $_POST['uemail'];
+    $password=$_POST['pwd'];
     
     require_once 'db.php';
     require_once 'functions.php';
 
-    if(emptyFieldLogin($username,$password) !== false){
+    if(emptyFieldLogin($email,$password) !== false){
         header("location: login.php?error=emptyinput");
         exit();
     }
 
-    loginUser($dbc,$username,$password);
+    loginUser($dbc,$email,$password);
 
 } else {
     header("Location: login.php");

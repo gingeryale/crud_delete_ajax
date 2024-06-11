@@ -21,13 +21,19 @@ session_start();
             <li>
             <a href="./">Home</a>
                 <a href="./products.php">Products</a>
-                <a href="./create.php">Create</a>
-                <a href="./register.php">Register</a>
                 <a href="./login.php">Login</a>
-                <a href="./profile.php">Profile</a>
-                <a href="./logout.php">Logout</a>
                 <?php if(isset($_SESSION["userid"])){
-                    echo "signed";
+                     echo "<a href='./create.php'>Create</a>";
+                     echo " ";
+                     echo "<a href='./profile.php'>Profile</a>";
+                     echo " ";
+                     echo "<a href='./logout.php'>Logout</a>";
+                     echo " ";
+                    echo "<h5 class='badge badge-success'>hello ".$_SESSION['userfname']."</h5>";
+                }
+                if(!isset($_SESSION["userid"])){
+                    echo "Register and log into the system: ";
+                    echo "<a href='./register.php'>Register</a>";
                 }
                 ?>
             </li>

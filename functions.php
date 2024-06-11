@@ -98,7 +98,7 @@ function emptyFieldLogin($username,$password) {
     return $result;
 }
 
-function loginUser($dbc, $username,$password){
+function loginUser($dbc, $email,$password){
     $user_exists = userExists($dbc, $email);
 
     if($user_exists === false){
@@ -117,6 +117,8 @@ function loginUser($dbc, $username,$password){
         session_start();
         $_SESSION['userid'] = $user_exists['u_id'];
         $_SESSION['userfname'] = $user_exists['u_fname'];
+        $_SESSION['userlname'] = $user_exists['u_lname'];
+        $_SESSION['useremail'] = $user_exists['u_email'];
         header("location: index.php");
         exit();
     }
