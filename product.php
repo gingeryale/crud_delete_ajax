@@ -20,7 +20,7 @@ require 'header.php';
            </div>
                 
                 <div class="col-lg-6">
-           <img src="images/default.png" alt="default product image">
+           <img src="<?=$row['p_pic'] ? 'uploads/'.$row['p_pic'] : 'images/default.png'?>" alt="default product image">
         </div>
             
         </div>
