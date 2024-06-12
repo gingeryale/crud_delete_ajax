@@ -40,7 +40,7 @@ header("location: products.php");
     </div>
     <div class="form-group">
     Describe:
-    <input type="text" name="text" placeholder="<?= $row['p_text']?>" value="<?= $row['p_text']?>">
+    <textarea class="form-control" name="text" id="description" placeholder="<?= $row['p_text']?>" rows="4" value="<?= $row['p_text']?>" required></textarea>
     </div>
     <div class="form-group">
     Is Stocked?
@@ -50,7 +50,7 @@ header("location: products.php");
       <?
     ?>
 </div>
-  <button name="submit">Edit</button>
+  <button class="mt-4 btn btn-success" name="submit">Edit</button>
 </div>
   </form>
   <?php

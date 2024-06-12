@@ -2,8 +2,10 @@
 require 'header.php';
 ?>
     <h2>All our Products</h2>
-    <a href="./create.php" class="badge badge-success">Add Products</a>
-    <ul class="list-group">
+<?   if(isset($_SESSION["userid"])){?>
+    <a href="./create.php" class="m-4 btn btn-primary">Add Products</a>
+    <? } ?>
+    <ul class="m-4 list-group border-primary border-2">
     <?php
     
     $sql="SELECT * FROM products";
@@ -12,14 +14,14 @@ require 'header.php';
 
     if($rowNum > 0){
         foreach ($prepared as $row){?>
-        <li id="<?= $row['p_id'];?>" class="list-group-item d-flex justify-content-between <?= $row['p_inStock'] ? 'bg-success' : ''?>">
-            <a href="product.php?id=<?= $row['p_id']; ?>" class="<?= $row['p_inStock'] ? 'text-white' : ''?>">
+        <li id="<?= $row['p_id'];?>" class="list-group-item d-flex justify-content-between <?= $row['p_inStock'] ? 'bg-success-subtle' : ''?>">
+            <a href="product.php?id=<?= $row['p_id']; ?>" class="<?= $row['p_inStock'] ? 'text-dark' : ''?>">
                 <?= $row['p_name'];?>
             </a>
             <span>
             <?php if(isset($_SESSION["userid"])){?>
             <button name="delete" class="btn btn-danger">Delete</button>
-            <a name="edit" href="edit.php?id=<?= $row['p_id']; ?>" class="btn btn-info">Edit</a>
+            <a name="edit" href="edit.php?id=<?= $row['p_id']; ?>" class="btn btn-light border">Edit</a>
             </span>
             <?php } ?>
         </li>

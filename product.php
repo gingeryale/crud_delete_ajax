@@ -2,8 +2,7 @@
 require 'header.php';
 ?>
     <h2>All our Products</h2>
-    <a href="./products.php" class="badge badge-success">Go Back</a>
-    <ul class="list-group">
+    <div class="card mb-4">
     <?php
     $productId = htmlspecialchars($_GET['id']) ?? null;
     $sql="SELECT * FROM products WHERE p_id=$productId";
@@ -12,36 +11,26 @@ require 'header.php';
 
     if($rowNum > 0){
         foreach ($prepared as $row){?>
-        <li class="list-group-item d-flex flex-column">
-           
-                <h3><?= $row['p_name']?></h3>
+        <div class="card-body d-flex">
+           <div class="col-lg-6 d-flex flex-column">
+           <h3><?= $row['p_name']?></h3>
                 <p><?= $row['p_text']?></p>
                 <p><b>Product Serial No.</b> <?= $row['p_serial']?></p>
-                <p><b>In Stock:</b> <?= $row['p_inStock'] ? 'Yes' : 'Out of stock';?> </p>
+                <p><b>Availability:</b> <?= $row['p_inStock'] ? "<span class='badge text-bg-success'>In stock</span>" : "<span class='badge text-bg-danger'>Out of stock</span>"?> </p>
+           </div>
+                
+                <div class="col-lg-6">
+           <img src="images/default.png" alt="default product image">
+        </div>
             
-        </li>
+        </div>
+       
         <?php }
     }
     ?>
-</ul>
-<script>
+</div>
+<a href="./products.php" class="link-primary link-offset-2 link-underline-opacity-55 link-underline-opacity-100-hover">Back to all products</a>
 
-
-$('button[name="delete"]').click(function(){
-
-    let pid = $(this).parent().attr( "id" );
-    console.log(pid);
-    $.ajax({
-    method:"POST",
-    url:"delete.php",
-    data:{id:pid},
-    success:function(data){
-        console.log('click');
-    }
-})
-})
-
-    </script>
 
 <?php
 require 'footer.php';
