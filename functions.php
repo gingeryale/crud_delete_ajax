@@ -22,6 +22,16 @@ function invalidUsername($fname){
     return $result;
 }
 
+function invalidInput($field){
+    $result;
+    if(!preg_match("/^[a-zA-Z0-9]*$/", $field)){
+        $result = true;
+    } else{
+        $result = false;
+    }
+    return $result;
+}
+
 function invalidEmail($email){
     $result;
     if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
@@ -58,6 +68,7 @@ function userExists($dbc, $email){
 
    if($row = mysqli_fetch_assoc($resultData)){
    return $row;
+  
    }else{
     $result = false;
     return $result;
@@ -79,6 +90,27 @@ function createUser($dbc, $fname,$lname,$email,$pwd){
    $hashedpwd=password_hash($pwd, PASSWORD_DEFAULT);
 
    mysqli_stmt_bind_param($prepare, 'ssiss', $fname,$lname,$urole,$email,$hashedpwd);
+   mysqli_stmt_execute($prepare);
+
+   mysqli_stmt_close($prepare);
+   header('location: index.php?error=none');
+   exit();
+}
+
+
+function editUser($dbc, $fname,$lname,$email,$pic,$pwd){
+    $urole=1;
+    $sql = "INSERT INTO users(u_fname,u_lname,u_role,u_email,u_password,u_pic)
+    VALUES (?,?,?,?,?,?);";
+    $prepare = mysqli_stmt_init($dbc);
+   if(!mysqli_stmt_prepare($prepare, $sql)){
+    header('location: register.php?error=failconnect');
+    exit();
+   }
+
+   $hashedpwd=password_hash($pwd, PASSWORD_DEFAULT);
+
+   mysqli_stmt_bind_param($prepare, 'ssisss', $fname,$lname,$urole,$email,$hashedpwd,$pic);
    mysqli_stmt_execute($prepare);
 
    mysqli_stmt_close($prepare);
@@ -117,8 +149,7 @@ function loginUser($dbc, $email,$password){
         session_start();
         $_SESSION['userid'] = $user_exists['u_id'];
         $_SESSION['userfname'] = $user_exists['u_fname'];
-        $_SESSION['userlname'] = $user_exists['u_lname'];
-        $_SESSION['useremail'] = $user_exists['u_email'];
+        $_SESSION['userpic'] = $user_exists['u_pic'];
         header("location: index.php");
         exit();
     }

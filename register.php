@@ -40,6 +40,7 @@ Register
     <label for="pwd">Password</label>
         <input type="text" name="pwd">
     </div>
+   
     <div class="form-control">
         <input type="submit" name="submit" value="Register">
     </div>

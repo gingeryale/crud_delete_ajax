@@ -18,8 +18,8 @@ require 'header.php';
             <a href="product.php?id=<?= $row['p_id']; ?>" class="<?= $row['p_inStock'] ? 'text-dark' : ''?>">
                 <?= $row['p_name'];?>
             </a>
-            <span>
             <?php if(isset($_SESSION["userid"])){?>
+            <span>
             <button name="delete" class="btn btn-danger">Delete</button>
             <a name="edit" href="edit.php?id=<?= $row['p_id']; ?>" class="btn btn-light border">Edit</a>
             </span>
